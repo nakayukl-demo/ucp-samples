@@ -78,8 +78,8 @@ async def run(host, port):
         port: The port to listen on.
 
     """
-    if not os.getenv("GOOGLE_API_KEY"):
-        logger.error("GOOGLE_API_KEY must be set")
+    if not os.getenv("AWS_REGION_NAME"):
+        logger.error("AWS_REGION_NAME must be set")
         exit(1)
 
     base_path = Path(__file__).parent

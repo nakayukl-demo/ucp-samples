@@ -20,6 +20,7 @@ from a2a.types import TaskState
 from a2a.utils import get_message_text
 from google.adk.agents import Agent
 from google.adk.agents.callback_context import CallbackContext
+from google.adk.models.lite_llm import LiteLlm
 from google.adk.tools.base_tool import BaseTool
 from google.adk.tools.tool_context import ToolContext
 from google.genai import types
@@ -436,7 +437,7 @@ def modify_output_after_agent(
 
 root_agent = Agent(
     name="shopper_agent",
-    model="gemini-3-flash-preview",
+    model=LiteLlm(model="bedrock/us.anthropic.claude-sonnet-4-20250514-v1:0"),
     description="Agent to help with shopping",
     instruction=(
         "You are a helpful agent who can help user with shopping actions such"
