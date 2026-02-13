@@ -28,7 +28,7 @@ The sample uses **[Google ADK](https://google.github.io/adk-docs/)** (Agent Deve
 <tr><td>📦</td><td><b>UCP Fulfillment Capability:</b> Implements <code>dev.ucp.shopping.fulfillment</code> for shipping address collection, delivery options, and fulfillment method selection.</td></tr>
 <tr><td>💳</td><td><b>UCP Payment Handling:</b> Supports <code>PaymentInstrument</code> types with configurable payment handlers and merchant business configuration via UCP profile.</td></tr>
 <tr><td>🤝</td><td><b>Capability Negotiation:</b> Client and merchant exchange UCP profiles at <code>/.well-known/ucp</code> to agree on supported features before transactions begin.</td></tr>
-<tr><td>🤖</td><td><b>Google ADK Agent:</b> Gemini 3.0 Flash model with 8 shopping tools (search, checkout, payment) demonstrating how to build UCP-aware agents.</td></tr>
+<tr><td>🤖</td><td><b>Google ADK Agent:</b> Amazon Bedrock Claude Sonnet 4 model with 8 shopping tools (search, checkout, payment) demonstrating how to build UCP-aware agents.</td></tr>
 <tr><td>🔗</td><td><b>A2A Protocol:</b> Agent discovery via <code>/.well-known/agent-card.json</code> and JSON-RPC 2.0 communication - showing UCP as an A2A extension.</td></tr>
 <tr><td>💻</td><td><b>React Chat Client:</b> TypeScript UI that renders UCP data types (Checkout, LineItem, PaymentResponse, OrderConfirmation) with proper capability handling.</td></tr>
 </table>
@@ -59,6 +59,8 @@ The sample uses **[Google ADK](https://google.github.io/adk-docs/)** (Agent Deve
 - **Capability Negotiation** happens before processing - agent and client agree on supported features
 - **RetailStore** uses UCP SDK types internally for checkout, fulfillment, and payment data
 
+> **Note:** This implementation uses **Amazon Bedrock Claude Sonnet 4** instead of Gemini. The architecture diagram shows the original Gemini 2.5 Flash implementation, but the actual code uses Bedrock Claude via LiteLLM integration.
+
 ## Quick Start
 
 > ⏱️ **Setup time:** ~5 minutes
@@ -69,7 +71,7 @@ Before you begin, ensure you have:
 
 - [ ] Python 3.13+ with [UV](https://docs.astral.sh/uv/)
 - [ ] Node.js 18+
-- [ ] [Gemini API Key](https://aistudio.google.com/apikey)
+- [ ] AWS credentials with access to Amazon Bedrock Claude Sonnet 4
 
 ### 1. Start the Cymbal Retail Agent
 
@@ -79,7 +81,12 @@ uv sync
 cp env.example .env
 ```
 
-Edit `.env` and add your `GOOGLE_API_KEY`, then start the agent:
+Edit `.env` and add your AWS credentials:
+- `AWS_REGION_NAME` (e.g., `us-east-1`)
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+Then start the agent:
 
 ```bash
 uv run business_agent
@@ -186,7 +193,8 @@ This sample uses the following UCP capabilities:
 
 | Technology | Purpose | Used For |
 |------------|---------|----------|
-| **[Google ADK](https://google.github.io/adk-docs/)** | Agent Framework | AI agent with tools, Gemini LLM integration, session management |
+| **[Google ADK](https://google.github.io/adk-docs/)** | Agent Framework | AI agent with tools, LLM integration via LiteLLM, session management |
+| **[Amazon Bedrock](https://aws.amazon.com/bedrock/)** | LLM Provider | Claude Sonnet 4 model for natural language understanding and tool calling |
 | **[A2A Protocol](https://a2a-protocol.org/latest/)** | Communication | Agent discovery via Agent Card, JSON-RPC messaging, task management |
 | **[UCP](https://ucp.dev)** | Commerce Standard | Standardized product, checkout, payment, and order data types |
 
@@ -194,6 +202,7 @@ This sample uses the following UCP capabilities:
 
 - [UCP Specification](https://ucp.dev/specification/overview/)
 - [Google ADK Documentation](https://google.github.io/adk-docs/)
+- [Amazon Bedrock Claude Models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html)
 - [A2A Protocol Specification](https://a2a-protocol.org/latest/specification/)
 - [UCP Python SDK](https://github.com/Universal-Commerce-Protocol/python-sdk)
 
