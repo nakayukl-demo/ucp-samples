@@ -24,7 +24,7 @@ AI-powered shopping agent built with Google ADK, demonstrating UCP commerce inte
 | Layer | Technology |
 |-------|------------|
 | Agent Framework | [Google ADK](https://google.github.io/adk-docs/) (Agent Development Kit) |
-| LLM | Gemini 3.0 Flash |
+| LLM | Amazon Bedrock Claude Sonnet 4 (via LiteLLM) |
 | Commerce Protocol | [UCP](https://ucp.dev/) (Universal Commerce Protocol) |
 | Agent Protocol | [A2A](https://a2a-protocol.org/) (Agent-to-Agent) JSON-RPC 2.0 |
 | Backend | Python 3.13, Uvicorn, Starlette, Pydantic |
@@ -244,7 +244,8 @@ return {"message": "Error description", "status": "error"}
 | **ADK Docs** | https://google.github.io/adk-docs/ |
 | **A2A Protocol** | https://a2a-protocol.org/latest/ |
 | **UCP Specification** | https://ucp.dev/specification/overview/ |
-| **Gemini API** | https://ai.google.dev/gemini-api/docs |
+| **Amazon Bedrock** | https://docs.aws.amazon.com/bedrock/ |
+| **LiteLLM** | https://docs.litellm.ai/ |
 
 ## Dependencies
 
